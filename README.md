@@ -5,8 +5,6 @@ If you have queries on code below, drop me a note at: sugh @ microsoft dot com
 Outline of load test code
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// Issue N async queries in a loop, with optional delay between each query
-
 public void queryLoadTest() {
     for (int i=0; i<maxNumReads; i++) {
         int keyIdx = gradeKeyRand.nextInt(allKeys.size()); // Get a random grade key that was already written to earlier
