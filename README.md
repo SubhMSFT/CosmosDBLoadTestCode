@@ -4,28 +4,28 @@ If you have queries on code below, drop me a note at: sugh @ microsoft dot com
 
 Outline of load test code
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        // Issue N async queries in a loop, with optional delay between each query
+        public void queryLoadTest() {
+            for (int i=0; i<maxNumReads; i++) {
+                int keyIdx = gradeKeyRand.nextInt(allKeys.size()); // Get a random grade key that was already written to earlier
+                String key = allKeys.get(keyIdx);
 
-public void queryLoadTest() {
-    for (int i=0; i<maxNumReads; i++) {
-        int keyIdx = gradeKeyRand.nextInt(allKeys.size()); // Get a random grade key that was already written to earlier
-        String key = allKeys.get(keyIdx);
+                // Get a random grade parameter name that was already written to earlier
+                List<String> gradeNames = new ArrayList<>(gradesWritten.get(key).keySet());
+                int gradeNameIdx = gradeTypeRand.nextInt(gradeNames.size());
+                String gradeName = gradeNames.get(gradeNameIdx);
 
-        // Get a random grade parameter name that was already written to earlier
-        List<String> gradeNames = new ArrayList<>(gradesWritten.get(key).keySet());
-        int gradeNameIdx = gradeTypeRand.nextInt(gradeNames.size());
-        String gradeName = gradeNames.get(gradeNameIdx);
+                String pkey = "grc.com|" + gradeName + "|" + TimeUnit.DAY + "|" + key;
 
-        String pkey = "grc.com|" + gradeName + "|" + TimeUnit.DAY + "|" + key;
+                // Revised approach – fire async query each time in the loop by doing subscribe()
+                queryByPartitionKeyAsync("Day", "pk", pkey, GradeRec.class)
+                    .subscribe();
 
-        // Revised approach – fire async query each time in the loop by doing subscribe()
-        queryByPartitionKeyAsync("Day", "pk", pkey, GradeRec.class)
-            .subscribe();
-
-        // Optionally add a delay between each query – needed to set to 1 ms to avoid longer cold start / sporadic spikes
-        if (readDelayMs != null) {
-            Thread.sleep(readDelayMs);
+                // Optionally add a delay between each query – needed to set to 1 ms to avoid longer cold start / sporadic spikes
+                if (readDelayMs != null) {
+                    Thread.sleep(readDelayMs);
+            }
         }
-    }
 
 
     // Earlier I was firing all fluxes at about the same time and collecting results (scatter-gather approach)
