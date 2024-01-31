@@ -9,8 +9,7 @@ Outline of load test code
 
 public void queryLoadTest() {
     for (int i=0; i<maxNumReads; i++) {
-        // Get a random grade key that was already written to earlier
-        int keyIdx = gradeKeyRand.nextInt(allKeys.size());
+        int keyIdx = gradeKeyRand.nextInt(allKeys.size()); // Get a random grade key that was already written to earlier
         String key = allKeys.get(keyIdx);
 
         // Get a random grade parameter name that was already written to earlier
