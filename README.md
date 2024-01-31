@@ -7,7 +7,8 @@ Outline of load test code
         // Issue N async queries in a loop, with optional delay between each query
         public void queryLoadTest() {
         for (int i=0; i<maxNumReads; i++) {
-                int keyIdx = gradeKeyRand.nextInt(allKeys.size()); // Get a random grade key that was already written to earlier
+                // Get a random grade key that was already written to earlier
+                int keyIdx = gradeKeyRand.nextInt(allKeys.size()); 
                         String key = allKeys.get(keyIdx);
 
                 // Get a random grade parameter name that was already written to earlier
