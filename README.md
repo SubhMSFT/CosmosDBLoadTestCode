@@ -39,10 +39,11 @@ Outline of load test code
                 }
         }
 
-
-            // Earlier I was firing all fluxes at about the same time and collecting results (scatter-gather approach)
-            // Flux.merge(fluxes).collectList().block();
-
+                // Initially, we were firing all fluxes at about the same time and collecting results (Java Scatter-Gather pattern)
+                Flux.merge(fluxes).collectList().block();
+                // We changed to:
+                (Flux.merge(monos).collectList().block());
+                
         }
 
         public class GradeRec {
