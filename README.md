@@ -10,8 +10,6 @@ Azure Cosmos DB LoadTest Sample Code
 * Test VM: South Central US
 * Azure Region hosting Azure Cosmos DB: South Central US
 
-*/
-
 Java SDK v4 code for Azure Cosmos DB for NoSQL Perf Test done for a customer. <br>
 If you have queries on code below, drop me a note at: sugh @ microsoft dot com
 
