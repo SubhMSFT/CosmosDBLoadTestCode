@@ -1,4 +1,4 @@
-# MongoDB to Azure Cosmos DB Migration 
+# MongoDB to Azure Cosmos DB for NoSQL Migration 
 Azure Cosmos DB LoadTest Sample Code
 * An Azure Cosmos DB for NoSQL container with a throughput of 20,000 RU/s
 * Item size of 0.2 KB
