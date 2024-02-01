@@ -1,15 +1,14 @@
 # MongoDB to Azure Cosmos DB Migration 
-/* Azure Cosmos DB LoadTest Sample Code
-
-•	An Azure Cosmos DB for NoSQL container with a throughput of 20,000 RU/s
-•	Item size of 0.2 KB
-•	Operations primarily to be tested: point read and upsert
-•	5,000 async writes including 40% creates and 60% increments (using Patch API)
-•	10 threads
-•	Java SDK v4 4.36.0
-•	Account configured with Direct Connectivity mode, Session Consistency
-•	Test VM: South Central US
-•	Azure Region hosting Azure Cosmos DB: South Central US
+Azure Cosmos DB LoadTest Sample Code
+* An Azure Cosmos DB for NoSQL container with a throughput of 20,000 RU/s
+* Item size of 0.2 KB
+* Operations primarily to be tested: point read and upsert
+* 5,000 async writes including 40% creates and 60% increments (using Patch API)
+* 10 threads
+* Java SDK v4 4.36.0
+* Account configured with Direct Connectivity mode, Session Consistency
+* Test VM: South Central US
+* Azure Region hosting Azure Cosmos DB: South Central US
 
 */
 
