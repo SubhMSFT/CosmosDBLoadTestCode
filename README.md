@@ -25,22 +25,22 @@ Outline of load test code
                 // Optionally add a delay between each query – needed to set to 1 ms to avoid longer cold start / sporadic spikes
                 if (readDelayMs != null) {
                     Thread.sleep(readDelayMs);
-            }
+                }
         }
 
 
-    // Earlier I was firing all fluxes at about the same time and collecting results (scatter-gather approach)
-    // Flux.merge(fluxes).collectList().block();
+            // Earlier I was firing all fluxes at about the same time and collecting results (scatter-gather approach)
+            // Flux.merge(fluxes).collectList().block();
 
-}
+        }
 
-public class GradeRec {
-      private String pk;    // domain | name | timeUnit | key
-      private String id;    // timeUnitIndex
-      private Number val;
-      private Integer ttl;
-      ...
-}
+        public class GradeRec {
+              private String pk;    // domain | name | timeUnit | key
+              private String id;    // timeUnitIndex
+              private Number val;
+              private Integer ttl;
+              ...
+        }
 
 
 public <T> Flux<T> queryByPartitionKeyAsync(String containerId, String pkeyField, String pkey, Class<T> itemClz) {
