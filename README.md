@@ -40,11 +40,18 @@ Outline of load test code
         }
 
                 // Initially, we were firing all fluxes at about the same time and collecting results (Java Scatter-Gather pattern)
-                Flux.merge(fluxes).collectList().block();
-                
+                // As used in our actual load test by app-team
+                // Flux.merge(fluxes).collectList().block(); 
+
                 // We changed to:
+                // Flux#merge mergges ata from Pub sequences contained in an Iterable into an interleaved merged sequence. This creates a List<Mono<T>> without considering order. 
+                // Technically, this is still an iterable sequence.
+                // Then, we do a Flux#collectList which collect all elements emitted by this Flux into a List that is emitted by the resulting Mono when this sequence completes.
+                // So when the flux sequence completes you go back to a Mono<List<T>> containing the response.
+                // And on top of that you want to block everything.
                 Flux.merge(monos).collectList().block();
-                
+
+               
         }
 
         public class GradeRec {
