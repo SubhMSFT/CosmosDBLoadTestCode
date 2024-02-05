@@ -44,9 +44,10 @@ Outline of load test code
                 // Flux.merge(fluxes).collectList().block(); 
 
                 // We changed to:
-                // Flux#merge merges data from Pub sequences contained in an Iterable into an interleaved merged sequence. This creates a List<Mono<T>> without considering order. 
-                // Technically, this is still an iterable sequence.
-                // Then, we do a Flux#collectList which collect all elements emitted by this Flux into a List that is emitted by the resulting Mono when this sequence completes.
+                // Flux#merge merges data from Pub sequences contained in an Iterable into an interleaved merged sequence. 
+                // This creates a List<Mono<T>> without considering order. Technically, this is still an iterable sequence.
+                // Then, we do a Flux#collectList which collect all elements emitted by this Flux into a List that is emitted 
+                // by the resulting Mono when this sequence completes.
                 // So when the flux sequence completes you go back to a Mono<List<T>> containing the response.
                 // And on top of that you want to block everything.
                 Flux.merge(monos).collectList().block();
