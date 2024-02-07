@@ -5,7 +5,7 @@ Azure Cosmos DB LoadTest Sample Code
 * Operations primarily to be tested: point read and upsert
 * 5,000 async writes including 40% creates and 60% increments (using Patch API)
 * 10 threads
-* Java SDK v4 4.36.0 (initially) --> upgraded to v4 4.42.0 <!-- Replace with the latest version in your test -->
+* Java SDK v4 4.36.0 (initially) --> upgraded to v4 4.42.0 // Replace with the latest version in your test
 * Account configured with Direct Connectivity mode, Session Consistency
 * Test VM: South Central US
 * Azure Region hosting Azure Cosmos DB: South Central US
