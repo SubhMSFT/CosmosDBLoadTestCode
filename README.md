@@ -49,6 +49,7 @@ Outline of load test code:
                 // Then, we do a Flux#collectList which collect all elements emitted by this Flux into a List that is emitted 
                 // by the resulting Mono when this sequence completes.
                 // So when the flux sequence completes you go back to a Mono<List<T>> containing the response.
+                // See Challenge #4 Resolution in Blog post
                 Flux.merge(mono).collectList().subscribe(//your method here);
                 
         }
@@ -72,7 +73,7 @@ Outline of load test code:
             MutableDouble RUs = new MutableDouble();
             MutableInt numRecs = new MutableInt();
             return getContainer(containerId).queryItems(querySpec, queryOpts, itemClz).byPage(1000)
-                .publishOn(Schedulers.boundedElastic())
+                .publishOn(Schedulers.boundedElastic())         // See Challenge #4 Resolution in Blog post
                 .doOnNext(resp -> {
                     RUs.add(resp.getRequestCharge());
                     numRecs.add(resp.getResults().size());
