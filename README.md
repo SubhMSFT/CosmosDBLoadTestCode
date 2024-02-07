@@ -34,13 +34,14 @@ Outline of load test code:
                     .subscribe();
 
                 // Optionally add a delay between each query – needed to set to 1 ms to avoid longer cold start / sporadic spikes
+                // See Challenge #1 Resolution in Blog post
                 if (readDelayMs != null) {
                     Thread.sleep(readDelayMs);
                 }
         }
 
                 // Initially, we were firing all fluxes at about the same time and collecting results (Java Scatter-Gather pattern)
-                // Flux.merge(fluxes).collectList().subscribe(//mention method here);
+                // Flux.merge(fluxes).collectList().subscribe(//your method here);
 
                 // We changed to:
                 // Flux#merge merges data from Publisher sequences contained in an Iterable into an interleaved merged sequence. 
@@ -48,7 +49,7 @@ Outline of load test code:
                 // Then, we do a Flux#collectList which collect all elements emitted by this Flux into a List that is emitted 
                 // by the resulting Mono when this sequence completes.
                 // So when the flux sequence completes you go back to a Mono<List<T>> containing the response.
-                Flux.merge(mono).collectList().subscribe(//mention method here);
+                Flux.merge(mono).collectList().subscribe(//your method here);
                 
         }
 
@@ -105,7 +106,7 @@ Driver Init settings:
     ThrottlingRetryOptions retryOpts = new ThrottlingRetryOptions();
     retryOpts.setMaxRetryAttemptsOnThrottledRequests(0);
     CosmosClientBuilder clientBuilder = new CosmosClientBuilder()
-            .endpoint("https://<<cosmos-db-endpoint-URL")
+            .endpoint("https://<<cosmos-db-endpoint-URL>>")
             .key(key)
             .preferredRegions(Arrays.asList("South Central US"))
             .consistencyLevel(ConsistencyLevel.SESSION)
@@ -114,6 +115,8 @@ Driver Init settings:
 
 Customized connCfg rntbd network connectivity parameters for Azure Cosmos DB for NoSQL:
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    <b>// See Challenge #2 Resolution in Blog post</b>
     DirectConnectionConfig directConnCfg = DirectConnectionConfig.getDefaultConfig();
     directConnCfg.setConnectTimeout(Duration.ofMillis(600));
     directConnCfg.setNetworkRequestTimeout(Duration.ofSeconds(5));
