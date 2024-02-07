@@ -13,7 +13,7 @@ Azure Cosmos DB LoadTest Sample Code
 Java SDK v4 code for Azure Cosmos DB for NoSQL Perf Test done for a customer. <br>
 If you have queries, drop me a note at: sugh @ microsoft dot com
 
-Outline of load test code
+Outline of load test code:
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         // Issue N async queries in a loop, with optional delay between each query
         public void queryLoadTest() {
@@ -39,22 +39,15 @@ Outline of load test code
                 }
         }
 
-                // Initially, we were firing all fluxes at about the same time and 
-                // collecting results (Java Scatter-Gather pattern)
-                // As used in our actual load test by app-team
-                
-                Flux.merge(fluxes).collectList().subscribe(//mention method here);
-
-                // Challenge is to handle backpressure.
-                // Solution is to handle the same using Mono manually using code.
+                // Initially, we were firing all fluxes at about the same time and collecting results (Java Scatter-Gather pattern)
+                // Flux.merge(fluxes).collectList().subscribe(//mention method here);
 
                 // We changed to:
-                // Flux#merge merges data from Pub sequences contained in an Iterable into an interleaved merged sequence. 
+                // Flux#merge merges data from Publisher sequences contained in an Iterable into an interleaved merged sequence. 
                 // This creates a List<Mono<T>> without considering order. Technically, this is still an iterable sequence.
                 // Then, we do a Flux#collectList which collect all elements emitted by this Flux into a List that is emitted 
                 // by the resulting Mono when this sequence completes.
                 // So when the flux sequence completes you go back to a Mono<List<T>> containing the response.
-                // Flux.merge(monos).collectList().block();        -----> ORIGINALLY TESTED BY APP IN POC
                 Flux.merge(mono).collectList().subscribe(//mention method here);
                 
         }
@@ -107,7 +100,7 @@ Outline of load test code
                 .flatMapIterable(com.azure.cosmos.models.FeedResponse::getResults);
         }
 
-Driver Init
+Driver Init settings:
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     ThrottlingRetryOptions retryOpts = new ThrottlingRetryOptions();
     retryOpts.setMaxRetryAttemptsOnThrottledRequests(0);
@@ -119,7 +112,7 @@ Driver Init
             .throttlingRetryOptions(retryOpts);
 
 
-Customized connCfg rntbd network connectivity parameters for Azure Cosmos DB for NoSQL
+Customized connCfg rntbd network connectivity parameters for Azure Cosmos DB for NoSQL:
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     DirectConnectionConfig directConnCfg = DirectConnectionConfig.getDefaultConfig();
     directConnCfg.setConnectTimeout(Duration.ofMillis(600));
