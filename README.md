@@ -116,7 +116,7 @@ Driver Init settings:
 Customized connCfg rntbd network connectivity parameters for Azure Cosmos DB for NoSQL:
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-   **// See Challenge #2 Resolution in Blog post**
+    // See Challenge #2 Resolution in Blog post
     DirectConnectionConfig directConnCfg = DirectConnectionConfig.getDefaultConfig();
     directConnCfg.setConnectTimeout(Duration.ofMillis(600));
     directConnCfg.setNetworkRequestTimeout(Duration.ofSeconds(5));
