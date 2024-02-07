@@ -1,17 +1,17 @@
-# MongoDB to Azure Cosmos DB for NoSQL Migration 
+# MongoDB to Azure Cosmos DB for NoSQL Migration
 Azure Cosmos DB LoadTest Sample Code
 * An Azure Cosmos DB for NoSQL container with a throughput of 20,000 RU/s
 * Item size of 0.2 KB
 * Operations primarily to be tested: point read and upsert
 * 5,000 async writes including 40% creates and 60% increments (using Patch API)
 * 10 threads
-* Java SDK v4 4.36.0
+* Java SDK v4 4.36.0 (initially) --> upgraded to v4 4.42.0
 * Account configured with Direct Connectivity mode, Session Consistency
 * Test VM: South Central US
 * Azure Region hosting Azure Cosmos DB: South Central US
 
 Java SDK v4 code for Azure Cosmos DB for NoSQL Perf Test done for a customer. <br>
-If you have queries on code below, drop me a note at: sugh @ microsoft dot com
+If you have queries, drop me a note at: sugh @ microsoft dot com
 
 Outline of load test code
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ Outline of load test code
                 // collecting results (Java Scatter-Gather pattern)
                 // As used in our actual load test by app-team
                 // Flux.merge(fluxes).collectList().block();         -----> ORIGINALL TESTED BY APP IN POC
-                Flux.merge(fluxes).collectList();
+                Flux.merge(fluxes).collectList().subscribe(//mention method here);
 
                 // Challenge is to handle backpressure.
                 // Solution is to handle the same using Mono manually using code.
@@ -55,7 +55,7 @@ Outline of load test code
                 // by the resulting Mono when this sequence completes.
                 // So when the flux sequence completes you go back to a Mono<List<T>> containing the response.
                 // Flux.merge(monos).collectList().block();        -----> ORIGINALL TESTED BY APP IN POC
-                Flux.merge(mono).collectList();
+                Flux.merge(mono).collectList().subscribe(//mention method here);
                 
         }
 
