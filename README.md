@@ -34,7 +34,7 @@ Outline of load test code:
                     .subscribe();
 
                 // Optionally add a delay between each query – needed to set to 1 ms to avoid longer cold start / sporadic spikes
-                **// See Challenge #1 Resolution in Blog post**
+                // See Challenge #1 Resolution in Blog post
                 if (readDelayMs != null) {
                     Thread.sleep(readDelayMs);
                 }
