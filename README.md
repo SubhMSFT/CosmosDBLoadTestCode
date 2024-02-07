@@ -34,7 +34,7 @@ Outline of load test code:
                     .subscribe();
 
                 // Optionally add a delay between each query – needed to set to 1 ms to avoid longer cold start / sporadic spikes
-                // See Challenge #1 Resolution in Blog post
+                **// See Challenge #1 Resolution in Blog post**
                 if (readDelayMs != null) {
                     Thread.sleep(readDelayMs);
                 }
@@ -116,7 +116,7 @@ Driver Init settings:
 Customized connCfg rntbd network connectivity parameters for Azure Cosmos DB for NoSQL:
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    <b>// See Challenge #2 Resolution in Blog post</b>
+   **// See Challenge #2 Resolution in Blog post**
     DirectConnectionConfig directConnCfg = DirectConnectionConfig.getDefaultConfig();
     directConnCfg.setConnectTimeout(Duration.ofMillis(600));
     directConnCfg.setNetworkRequestTimeout(Duration.ofSeconds(5));
