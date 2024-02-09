@@ -13,6 +13,21 @@ Azure Cosmos DB LoadTest Sample Code
 Java SDK v4 code for Azure Cosmos DB for NoSQL Perf Test done for a customer. <br>
 If you have queries, drop me a note at: sugh @ microsoft dot com
 
+Sample test item:
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+{
+    "pkey": "grc.com|M04|DAY|Key-01",
+    "id": "34311211",
+    "val": 4,
+    "ttl": 120,
+    "timeUnitIndex": 34311211,
+    "_rid": "krV5AKuQuOsBAAAAAAAACA==",
+    "_self": "dbs/krV5AA==/colls/krV5AKuQuOs=/docs/krV5AKuQuOsBAAAAAAAACA==/",
+    "_etag": "\"40004e34-0000-0500-0000-63e3b2c10000\"",
+    "_attachments": "attachments/",
+    "_ts": 1675866817
+}
+
 Outline of load test code:
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         // Issue N async queries in a loop, with optional delay between each query
